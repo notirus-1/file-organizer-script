@@ -1,7 +1,6 @@
 # import essential modules
 from pathlib import Path
 import shutil
-import os
 # set directories
 directory_path = Path.home() / "Downloads"
 archives = directory_path / "archives"
@@ -38,7 +37,6 @@ for file in directory_path.glob('*'):
 print('creating folders for organization of files')
 archives.mkdir(parents=True, exist_ok=True)
 videos.mkdir(parents=True, exist_ok=True)
-photos.mkdir(parents=True, exist_ok=True)
 executibles.mkdir(parents=True, exist_ok=True)
 images.mkdir(parents=True, exist_ok=True)
 trash.mkdir(parents=True, exist_ok=True)
