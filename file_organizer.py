@@ -1,9 +1,10 @@
 # import essential modules
 from pathlib import Path
 import shutil
+import sys
 # set directories
 directory_path = Path.home() / "Downloads"
-archives = directory_path / "archives"
+archives = directory_path / "archives" 
 videos = directory_path / "videos"
 photos = directory_path / "photos"
 executibles = directory_path / "executibles"
@@ -14,6 +15,7 @@ video = ('.mp4', '.mov', '.avi', '.mkv')
 image = ('.png', '.jpg', '.jpeg', '.gif', '.bmp')
 executables = ('.exe', '.msi', '.bat', '.sh', '.AppImage,','.jar')
 trashes = ('.aria2',)
+files = [f for f in directory_path.glob('*') if f.is_file()]
 # set tuples for extensions
 archive_files = []
 video_files = []
@@ -22,18 +24,22 @@ executible_files = []
 trash_files = []
 # index files, add them to a tuple
 print('indexing all files')
-for file in directory_path.glob('*'):
-    if file.is_file():
-        if file.suffix in archive:
-            archive_files.append(str(file))
-        if file.suffix in video:
-            video_files.append(str(file))
-        if file.suffix in image:
-            image_files.append(str(file))
-        if file.suffix in executables:
-            executible_files.append(str(file))
-        if file.suffix in trashes:
-            trash_files.append(str(file))
+if not files:
+    print("No files found in the directory. Quitting...")
+    sys.exit()
+else:
+    for file in directory_path.glob('*'):
+        if file.is_file():
+            if file.suffix in archive:
+                archive_files.append(str(file))
+            if file.suffix in video:
+                video_files.append(str(file))
+            if file.suffix in image:
+                image_files.append(str(file))
+            if file.suffix in executables:
+                executible_files.append(str(file))
+            if file.suffix in trashes:
+                trash_files.append(str(file))
 print('creating folders for organization of files')
 archives.mkdir(parents=True, exist_ok=True)
 videos.mkdir(parents=True, exist_ok=True)
